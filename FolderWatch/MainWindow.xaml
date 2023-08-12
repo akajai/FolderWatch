@@ -1,0 +1,65 @@
+﻿<Window x:Class="FolderWatch.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:command="clr-namespace:CommunityToolkit.Mvvm.Input;assembly=CommunityToolkit.Mvvm" 
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="0" Width="150"  VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding ConnectCommand}">Browse</Button>
+
+            <ComboBox  Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" Width="150" Height="25" Grid.Row="0"
+                  ItemsSource="{Binding SortCountryNames}" SelectedItem="{Binding SortCountryName}"  >
+                
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+                
+            </ComboBox>
+            <Label Grid.Row="0" Grid.Column="2">Application</Label>
+            <ComboBox Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10" Width="150" Height="25"
+                  ItemsSource="{Binding Countries}" SelectedItem="{Binding FilterCountry}">
+                
+
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+
+        <StackPanel Grid.Row="0" Margin="30 30 30 30">
+            <ItemsControl ItemsSource="{Binding Persons , Mode=TwoWay}" BorderThickness="2">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="10">
+                                <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Country}" FontSize="14"/>
+                                <TextBlock Text="{Binding PhoneNumber}" FontSize="14"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        
+        
+    </Grid>
+</Window>
